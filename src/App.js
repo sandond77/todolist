@@ -23,6 +23,21 @@ class App extends Component {
     this.setState({ taskes })
   }
 
+
+  //Checks localstorage for saved state/taskes
+  componentDidMount() {
+    if (localStorage.getItem("taskes")) {
+      this.setState({
+        taskes: JSON.parse(localStorage.getItem("taskes"))
+      });
+    }
+  }
+
+  //saves the state/taskes to local storage after each state update
+  componentDidUpdate() {
+    localStorage.setItem("taskes", JSON.stringify(this.state.taskes));
+  }
+
   render() {
     return (
       <div className="container">
